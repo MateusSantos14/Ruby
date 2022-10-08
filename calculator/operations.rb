@@ -7,12 +7,18 @@ module Calculator
     include ExtraOperations
     
     def biased_mean(grades, blacklist)
-      grades = grades - blacklist
+      grades = JSON.parse(grades)
       media = 0
-      for aluno in grades do
-        media += aluno[1]/grades.length
+      cout = 0
+      blacklist = blacklist.split(" ")
+      grades.each do |key, value|
+        if not blacklist.include?(key)
+          media += value
+          cout += 1
+        end
       end
-      puts "Media preconceituosa = #{media}\n\n\n"
+      media = media/cout
+      puts "Media preconceituosa = #{media.round(2)}\n\n\n"
     end
   
     def no_integers(numbers)

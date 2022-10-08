@@ -13,33 +13,26 @@ module Calculator
       operacao = gets.chomp.to_i
       #Media Preconceituosa
       if(operacao == 1)
-        alunos = Array.new
-        blacklist = Array.new
+        alunos_json = "{"
         puts "Digite o nome dos alunos e suas notas:"
         controlador = 1
-        while controlador != 2
+        loop do
           puts "Nome:"
           nome = gets.chomp
           puts "Nota:"
           nota = gets.chomp.to_f
-          alunos.push([nome,nota])
+          alunos_json += "\"#{nome}\":#{nota}"
           puts "Deseja adicionar outro aluno:\n1-Sim 2-Não"
           controlador = gets.chomp.to_i
-        end
-        puts "Escolha os alunos da lista negra:"
-        loop do
-          puts "0 - Calcular média"
-          for a in alunos-blacklist do
-            puts "#{alunos.index(a)+1} - #{a[0]}"
-          end
-          to_lista = gets.chomp.to_i
-          if to_lista!=0
-            blacklist.push(alunos[to_lista-1])
-          else
-            operadores.biased_mean(alunos,blacklist)
+          if controlador == 2
             break
           end
+          alunos_json+=", "
         end
+        alunos_json+="}"
+        puts "Digite o nome dos alunos da lista negra:"
+        blacklist = gets.chomp
+        operadores.biased_mean(alunos_json,blacklist)
       #Divisiveis por 25
       elsif(operacao == 2)
         valores = Array.new
