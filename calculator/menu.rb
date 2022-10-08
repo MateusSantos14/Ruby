@@ -45,8 +45,8 @@ module Calculator
         valores = Array.new
         puts "Digite uma série de números para saber se eles são divisiveis por 25, se deseja parar de digitar, digite 0:"
         loop do
-          valor = gets.chomp.to_i
-          if valor == 0
+          valor = gets.chomp
+          if valor == "0"
             operadores.no_integers(valores)
             break
           else
@@ -55,7 +55,7 @@ module Calculator
         end
       #Filtro de filmes
       elsif(operacao == 3)
-        puts "Escolha o genero do filme:"
+        puts "Digite o genero do filme:\n Generos:"
         generos = [
           "Comedy",
           "Fantasy",
@@ -80,18 +80,9 @@ module Calculator
           "Sport"
         ]
         for a in generos do
-          puts "#{generos.index(a)+1} - #{a}"
+          puts "#{a}"
         end
-        genero = nil
-        loop do
-          genero = gets.chomp.to_i
-          if genero>0 and genero<generos.length
-            genero = generos[(genero)-1]
-            break
-          else
-            puts "Opção inválida"
-          end
-        end
+        genero = gets.chomp
         puts "Digite o ano do filme:"
         ano = gets.chomp
         operadores.filter_films(genero,ano)

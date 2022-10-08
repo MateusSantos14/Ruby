@@ -17,38 +17,39 @@ module Calculator
   
     def no_integers(numbers)
       puts "Números divisíveis por 25:\n"
-      for a in numbers do
-        aux = 25
-        while aux<=a
-          if aux == a
-            puts "#{a}\n"
-            break
-          else
-            aux = aux+25
-          end
+      for number in numbers do
+        #Confere se tem dos digitos, depois confere se terminar com: 00 25 50 75
+        if number.length>=2 and ((number[-1] == "0" and (number[-2] == "5" or number[-2] == "0" )) or (number[-1] == "5" and (number[-2] == "2" or number[-2] == "7" )))
+          print "S "
+        else
+          print "N "
         end
       end
+      puts "\n\n\n"
     end
   
     def filter_films(genres, year)
       count = 0
       films = get_films
+      puts "Filmes:\n"
+      genres = genres.split(" ")
       for movie in films[:movies] do
-        if movie[:year] == year and movie[:genres].include?(genres)
-          puts "Titulo: #{movie[:title]}"
-          puts "Ano de lançamento: #{movie[:year]}"
-          puts "Generos:"
-          for genr in movie[:genres] do
-            puts "#{genr}"
+        if movie[:year].to_i >= year.to_i
+          genero_selecionado = 0
+          for genero in movie[:genres] do
+            if genres.include?(genero)
+              genero_selecionado +=1
+            end
           end
-          puts "Atores: #{movie[:actors]}"
-          puts "Diretor: #{movie[:Diretor]}"
-          puts "Sinopse: #{movie[:plot]}"
-          count+=1
+          if genero_selecionado==genres.length
+            genero_selecionado = 1
+          else
+            genero_selecionado = 0
+          end
+          if genero_selecionado == 1
+            puts "Titulo: #{movie[:title]}"
+          end
         end
-      end
-      if count==0
-        puts "Não há filmes do genero no ano escolhido."
       end
       puts "\n\n\n"
     end
