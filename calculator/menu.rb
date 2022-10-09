@@ -48,33 +48,7 @@ module Calculator
         end
       #Filtro de filmes
       elsif(operacao == 3)
-        puts "Digite o genero do filme:\n Generos:"
-        generos = [
-          "Comedy",
-          "Fantasy",
-          "Crime",
-          "Drama",
-          "Music",
-          "Adventure",
-          "History",
-          "Thriller",
-          "Animation",
-          "Family",
-          "Mystery",
-          "Biography",
-          "Action",
-          "Film-Noir",
-          "Romance",
-          "Sci-Fi",
-          "War",
-          "Western",
-          "Horror",
-          "Musical",
-          "Sport"
-        ]
-        for a in generos do
-          puts "#{a}"
-        end
+        puts "Digite o genero do filme:\n"
         genero = gets.chomp
         puts "Digite o ano do filme:"
         ano = gets.chomp
